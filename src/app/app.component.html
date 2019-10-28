@@ -1,0 +1,11 @@
+<h1 style="text-align:center;color: crimson">Product List</h1>
+
+<div class="card" *ngFor="let product of products">
+    <img src="{{ product.ProductImage }}" alt="{{ product.Title }}" style="width:100%">
+    <h1>{{ product.Title }}</h1>
+    <p class="price">${{ product.Price }}</p>
+    <p>{{ product.Description }}</p>
+    <nav><a routerLink="/DisplayProduct" routerLinkActive="active"><p><button (click)="selectProduct(product)">View in detail</button></p></a></nav>
+</div>
+
+<router-outlet></router-outlet>

@@ -5,7 +5,7 @@
     <h1>{{ product.Title }}</h1>
     <p class="price">${{ product.Price }}</p>
     <p>{{ product.Description }}</p>
-    <nav><a routerLink="/DisplayProduct" routerLinkActive="active"><p><button (click)="selectProduct(product)">View in detail</button></p></a></nav>
+    <nav><a [routerLink]="['/DisplayProduct',product.Title]" routerLinkActive="active"><p><button (click)="selectProduct(product)">View in detail</button></p></a></nav>
 </div>
 
 <router-outlet></router-outlet>

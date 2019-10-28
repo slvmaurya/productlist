@@ -19,7 +19,8 @@ export class ProductService {
   }
 
   public getProductByName(productName: string): Observable<ProductList[]>{
-    return this.http.get<ProductList[]>('http://localhost:8012/SimpleProductListBackEnd/getByTitle.php?Title=${productName}');
+    const  params = new  HttpParams().set('Title', productName);
+    return this.http.get<ProductList[]>('http://localhost:8012/SimpleProductListBackEnd/getByTitle.php',{params});
 }
 
   

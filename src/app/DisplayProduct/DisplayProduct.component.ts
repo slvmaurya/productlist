@@ -11,21 +11,31 @@ import { ProductList } from '../ProductList';
   styleUrls: ['./displayproduct.component.css']
 })
 export class DisplayProductComponent {
-  public ProductTitle;
-  constructor(private route: ActivatedRoute, private router: Router,private http:HttpClient) { }
+    products: ProductList[];
+    error = '';
+  constructor(private productService: ProductService,private route: ActivatedRoute, private router: Router,private http:HttpClient) { }
 
   ngOnInit() {
-    // this.route.paramMap.subscribe((params: ParamMap) => {
-    //   let producttitle = params.get('producttitle');
-    //   this.ProductTitle = producttitle;
-
-    // });
-    this.getProductByName('Pencil');
+    let id = this.route.snapshot.paramMap.get('Title');
+    console.log(id);
+    this.getProduct(id);
     
   }
 
-  public getProductByName(productName: string): Observable<ProductList[]>{
-    return this.http.get<ProductList[]>('http://localhost:8012/SimpleProductListBackEnd/getByTitle.php?Title=${productName}');
-}
+
+
+
+  getProduct(productName: string): void {
+    this.productService.getProductByName(productName).subscribe(
+      (res: ProductList[]) => {
+        this.products = res;
+        console.log(this.products);
+      },
+      (err) => {
+        this.error = err;
+      }
+    );
+
+  }
 
 }
